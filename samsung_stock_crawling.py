@@ -21,3 +21,11 @@ for i in date_find:
     date.append(i.text)
 
 print("날짜: ", date)
+
+# 종가
+endprice_find = soup.select("tr > .num > span.p11")
+endprice = []
+for i in endprice_find:
+    endprice.append(i.text)
+
+print("종가: ", endprice)
