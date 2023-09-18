@@ -32,7 +32,6 @@ price_highlow = [] # 전일비 상승/하락
 highlow_find = soup.select(".num > img")
 for i in highlow_find:
     price_highlow.append(i.attrs["alt"])
-print("전일가 대비: ", price_highlow)
 # 수치데이터 => index번호 % 6 == (0): 종가, (1): 전일비, (2): 시가, (3): 고가, (4): 저가, (5): 거래량
 end_price = [] # 종가
 price_per_yesterday = [] # 전일비
@@ -55,8 +54,34 @@ for idx, val in enumerate(value_result):
         trade_num.append(val)
 
 print("종가: ", end_price)
-print("전일비: ", price_per_yesterday)
+# 전일비 통합
+complete_per_yesterday = []
+for i, j in zip(price_highlow, price_per_yesterday):
+    complete_per_yesterday.append("(" + i + ")" + str(j))
+print("전일비 종합: ", complete_per_yesterday)
 print("시가: ", start_price)
 print("고가: ", top_price)
 print("저가: ", below_price)
 print("거래량: ", trade_num)
+
+# csv 작성하기
+import csv
+
+f = open("samsung_stock.csv", "w", newline="", encoding = "utf-8")
+wr = csv.writer(f)
+wr.writerow(index)
+wr.writerow(date)
+wr.writerow(end_price)
+wr.writerow(complete_per_yesterday)
+wr.writerow(start_price)
+wr.writerow(top_price)
+wr.writerow(below_price)
+wr.writerow(trade_num)
+
+f.close()
+
+# csv 읽기
+f = open("samsung_stock.csv", "r", encoding = "utf-8")
+reader = csv.reader(f)
+data = list(reader)
+print(data)
