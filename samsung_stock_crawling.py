@@ -27,7 +27,10 @@ num_data_find = soup.select("tr > .num > span.p11")
 value_result = []
 for i in num_data_find:
     value_result.append(i.text)
-
-print("수치데이터: ", value_result)
-
-# 수치데이터 => index번호 // 6 == (0): 종가, (1): 전일비, (2): 시가, (3): 고가, (4): 저가, (5): 거래량
+print(value_result)
+# 수치데이터 => index번호 % 6 == (0): 종가, (1): 전일비, (2): 시가, (3): 고가, (4): 저가, (5): 거래량
+end_price = []
+for idx, val in enumerate(value_result):
+    if idx % 6 == 0:
+        end_price.append(val)
+print(end_price)
