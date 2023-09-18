@@ -94,7 +94,19 @@ for i in csv_value:
 f.close()
 
 # csv 읽기
-f = open("stock.csv", "r", encoding = "utf-8")
-reader = csv.reader(f)
-data = list(reader)
-print(data)
+
+import pandas as pd
+df = pd.read_csv("stock.csv", encoding="utf-8")
+print(df)
+print(len(df))
+print(df.loc[1])
+print(df["날짜"][0].split("."))
+
+for dn in range(len(df)):
+    if df["날짜"][dn].split(".")[0] == "2023" and df["날짜"][dn].split(".")[1] == "08":
+        pass
+    else:
+        df.drop([dn], axis=0, inplace=True)
+
+print(df)
+df.to_csv("stock.csv")
