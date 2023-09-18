@@ -22,10 +22,12 @@ for i in date_find:
 
 print("날짜: ", date)
 
-# 종가
-endprice_find = soup.select("tr > .num > span.p11")
+# 수치데이터
+num_data_find = soup.select("tr > .num > span.p11")
 endprice = []
-for i in endprice_find:
+for i in num_data_find:
     endprice.append(i.text)
 
-print("종가: ", endprice)
+print("수치데이터: ", endprice)
+
+# 수치데이터 => index번호 // 6 == (0): 종가, (1): 전일비, (2): 시가, (3): 고가, (4): 저가, (5): 거래량
