@@ -27,8 +27,7 @@ for i in num_data_find:
 
 price_highlow = [] # 전일비 상승/하락
 highlow_find = soup.select(".num > img")
-for i in highlow_find:
-    price_highlow.append(i.attrs["alt"])
+
 # 수치데이터 => index번호 % 6 == (0): 종가, (1): 전일비, (2): 시가, (3): 고가, (4): 저가, (5): 거래량
 end_price = [] # 종가
 price_per_yesterday = [] # 전일비
@@ -49,6 +48,13 @@ for idx, val in enumerate(value_result):
         below_price.append(val)
     else:
         trade_num.append(val)
+
+for i in highlow_find:
+    for j in range(len(highlow_find)):
+        if price_per_yesterday[j] == 0:
+            price_highlow.append("변동없음")
+        else:
+            price_highlow.append(i.attrs["alt"])
 # 전일비 통합
 complete_per_yesterday = []
 for i, j in zip(price_highlow, price_per_yesterday):
