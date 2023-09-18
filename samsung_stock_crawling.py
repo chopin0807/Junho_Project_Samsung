@@ -11,7 +11,6 @@ index = [] # csv의 index 항목에 대한 리스트
 for i in index_find:
     index.append(i.text)
 
-print("csv 인덱스: ", index)
 # 각 인덱스에 따른 데이터값
 
 # 날짜
@@ -19,8 +18,6 @@ date_find = soup.select(".gray03")
 date = []
 for i in date_find:
     date.append(i.text)
-
-print("날짜: ", date)
 
 # 수치데이터
 num_data_find = soup.select("tr > .num > span.p11")
@@ -52,17 +49,10 @@ for idx, val in enumerate(value_result):
         below_price.append(val)
     else:
         trade_num.append(val)
-
-print("종가: ", end_price)
 # 전일비 통합
 complete_per_yesterday = []
 for i, j in zip(price_highlow, price_per_yesterday):
     complete_per_yesterday.append("(" + i + ")" + str(j))
-print("전일비 종합: ", complete_per_yesterday)
-print("시가: ", start_price)
-print("고가: ", top_price)
-print("저가: ", below_price)
-print("거래량: ", trade_num)
 
 # csv 작성하기
 import csv
@@ -70,14 +60,20 @@ import csv
 f = open("samsung_stock.csv", "w", newline="", encoding = "utf-8")
 wr = csv.writer(f)
 wr.writerow(index)
-wr.writerow(date)
-wr.writerow(end_price)
-wr.writerow(complete_per_yesterday)
-wr.writerow(start_price)
-wr.writerow(top_price)
-wr.writerow(below_price)
-wr.writerow(trade_num)
+csv_value = []
+for i in range(len(date)):
+    temp = []
+    temp.append(date[i])
+    temp.append(end_price[i])
+    temp.append(complete_per_yesterday[i])
+    temp.append(start_price[i])
+    temp.append(top_price[i])
+    temp.append(below_price[i])
+    temp.append(trade_num[i])
+    csv_value.append(temp)
 
+for i in csv_value:
+    wr.writerow(i)
 f.close()
 
 # csv 읽기
