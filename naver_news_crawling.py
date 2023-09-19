@@ -54,6 +54,7 @@ for i in url:
 # print("기사 url: ", url_result)
 
 # 기사본문/기사반응
+article_result = [] # 기사본문
 # 검색된 기사 url에 대한 각각의 크롤링 후 기사본문/기사반응 수집
 for article in url_result:
     article_response = requests.get(article, {"User-agent": "Mozilla/5.0"})
@@ -61,12 +62,27 @@ for article in url_result:
 
     # 기사본문
     text_find = article_soup.select("div > article") # 스포츠외의 기사
-    sport_text = article_soup.select(".content_area > .news_end")
-    
-    for text in sport_text:
-        # print(text.text.strip())
-        text_result = re.sub("[^0-9가-힣].[a-z0-9]+@[a-z0-9.]+.[(\[].*[)\]]", "", text.text.strip())
+    sport_text = article_soup.select(".content_area > .news_end") # 스포츠기사
+    like_result = [] # 기사반응
+    if len(text_find) != 0:
+        text_result = re.sub("[^0-9가-힣].[a-z0-9]+@[a-z0-9.]+.[(\[].*[)\]]", "", text_find[0].text.strip())
         text_result = re.sub("[^0-9가-힣].[a-z0-9]+@[a-z0-9.]*", "", text_result)
-        text_find = re.findall(".*\n(?=기사제공 연합뉴스)", text_result)
-        print(text_find)
-        print("============================================================================================================")
+        # print(text_result)
+        # print("=============================================================================================")
+        article_result.append(text_result)
+        like_find = article_soup.select(".u_likeit_list")
+        for like in like_find:
+            like_result.append(like)
+    else:
+        sport_result = re.sub("[^0-9가-힣].[a-z0-9]+@[a-z0-9.]+.[(\[].*[)\]]", "", sport_text[0].text.strip())
+        sport_result = re.sub("[^0-9가-힣].[a-z0-9]+@[a-z0-9.]*", "", sport_result)
+        sport_find = re.findall(".*\n(?=기사제공 연합뉴스)", sport_result)
+        sport_result = sport_find[0]
+        # print(sport_result)
+        # print("=============================================================================================")
+        article_result.append(sport_result)
+        like_sport = article_soup.select(".u_likeit_list_button")
+        for like in like_sport:
+            like_result.append(like)
+    # print(like_result) # 카테고리명은 알맞게 나오나 카테고리별 수치가 사이트의 수치와 관계없이 모두 0으로 나옴
+print(article_result)
