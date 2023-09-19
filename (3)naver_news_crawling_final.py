@@ -75,7 +75,7 @@ for d in range(1, 32):
                 like_find = article_soup.select(".u_likeit_list")
                 for like in like_find:
                     like_result.append(like)
-            else:
+            elif len(sport_text) != 0:
                 sport_result = re.sub("[^0-9가-힣].[a-z0-9]+@[a-z0-9.]+.[(\[].*[)\]]", "", sport_text[0].text.strip())
                 sport_result = re.sub("[^0-9가-힣].[a-z0-9]+@[a-z0-9.]*", "", sport_result)
                 sport_find = re.findall(".*\n(?=기사제공 연합뉴스)", sport_result)
@@ -87,6 +87,8 @@ for d in range(1, 32):
                 for like in like_sport:
                     like_result.append(like)
             # print(like_result) # 카테고리명은 알맞게 나오나 카테고리별 수치가 사이트의 수치와 관계없이 모두 0으로 나옴
+            else:
+                article_result.append("기사내용 불분명")
         # print(article_result)
 
         # 기사 크롤링 종료
