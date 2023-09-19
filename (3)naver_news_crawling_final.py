@@ -87,7 +87,26 @@ for d in range(1, 32):
                 for like in like_sport:
                     like_result.append(like)
             # print(like_result) # 카테고리명은 알맞게 나오나 카테고리별 수치가 사이트의 수치와 관계없이 모두 0으로 나옴
-        print(article_result)
+        # print(article_result)
 
         # 기사 크롤링 종료
         p += 1
+
+# csv 파일 작성
+import csv
+
+f = open("news.csv", "w", newline="", encoding="utf-8")
+wr = csv.writer(f)
+index = ["날짜", "타이틀", "기사본문"]
+wr.writerow(index)
+csv_value = []
+for i in range(len(date_result)):
+    temp = []
+    temp.append(date_result[i])
+    temp.append(title[i])
+    temp.append(article_result[i])
+    csv_value.append(temp)
+
+for i in csv_value:
+    wr.writerow(i)
+f.close()
