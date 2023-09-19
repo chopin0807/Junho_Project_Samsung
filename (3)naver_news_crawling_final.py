@@ -80,7 +80,7 @@ for d in range(1, 32):
                 text_result = re.sub("[^0-9가-힣].[a-z0-9]+@[a-z0-9.]*", "", text_result)
                 # print(text_result)
                 # print("=============================================================================================")
-                article_result.append(text_result)
+                article_result.append(text_result.strip())
                 like_find = article_soup.select(".u_likeit_list")
                 for like in like_find:
                     like_result.append(like)
@@ -91,7 +91,7 @@ for d in range(1, 32):
                 sport_result = sport_find[0]
                 # print(sport_result)
                 # print("=============================================================================================")
-                article_result.append(sport_result)
+                article_result.append(sport_result.strip())
                 like_sport = article_soup.select(".u_likeit_list_button")
                 for like in like_sport:
                     like_result.append(like)
