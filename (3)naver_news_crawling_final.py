@@ -2,6 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 import re # 정규표현식 사용
 
+# csv 파일 작성
+import csv
+
+f = open("news.csv", "w", newline="", encoding="utf-8")
+wr = csv.writer(f)
+index = ["날짜", "타이틀", "기사본문"]
+wr.writerow(index)
+csv_value = []
+
 for d in range(1, 32):
     p = 1
     while True:
@@ -94,21 +103,13 @@ for d in range(1, 32):
         # 기사 크롤링 종료
         p += 1
 
-# csv 파일 작성
-import csv
+        for i in range(len(date_result)):
+            temp = []
+            temp.append(date_result[i])
+            temp.append(title[i])
+            temp.append(article_result[i])
+            csv_value.append(temp)
 
-f = open("news.csv", "w", newline="", encoding="utf-8")
-wr = csv.writer(f)
-index = ["날짜", "타이틀", "기사본문"]
-wr.writerow(index)
-csv_value = []
-for i in range(len(date_result)):
-    temp = []
-    temp.append(date_result[i])
-    temp.append(title[i])
-    temp.append(article_result[i])
-    csv_value.append(temp)
-
-for i in csv_value:
-    wr.writerow(i)
+        for i in csv_value:
+            wr.writerow(i)
 f.close()
