@@ -97,7 +97,7 @@ for d in range(1, 32):
                     like_result.append(like)
             # print(like_result) # 카테고리명은 알맞게 나오나 카테고리별 수치가 사이트의 수치와 관계없이 모두 0으로 나옴
             else:
-                article_result.append("기사내용 불분명")
+                article_result.append("<기사내용 불분명>")
         # print(article_result)
 
         # 기사 크롤링 종료
