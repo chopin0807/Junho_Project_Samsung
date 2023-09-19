@@ -9,9 +9,9 @@ f = open("news.csv", "w", newline="", encoding="utf-8")
 wr = csv.writer(f)
 index = ["날짜", "타이틀", "기사본문"]
 wr.writerow(index)
-csv_value = []
 
 for d in range(1, 32):
+    csv_value = []
     p = 1
     while True:
         date = str(d)
@@ -107,7 +107,9 @@ for d in range(1, 32):
             temp = []
             temp.append(date_result[i])
             temp.append(title[i])
-            temp.append(article_result[i])
+            # temp.append(article_result[i])
+            article_rstrip = article_result[i].replace("\n", "")
+            temp.append(article_rstrip)
             csv_value.append(temp)
 
         for i in csv_value:
