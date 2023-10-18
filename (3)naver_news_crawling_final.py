@@ -10,7 +10,7 @@ wr = csv.writer(f)
 index = ["날짜", "타이틀", "기사본문"]
 wr.writerow(index)
 
-for d in range(1, 32):
+for d in range(1, 31):
     csv_value = []
     p = 1
     while True:
