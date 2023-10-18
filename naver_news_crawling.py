@@ -1,13 +1,13 @@
 # 네이버 뉴스 크롤링
-# 20230831 ~ 20230801까지의 각 URL로 접속한 후 각 기사에 접속하는 방식으로 진행함 => crawling 두번 진행
+# 20230930 ~ 20230901까지의 각 URL로 접속한 후 각 기사에 접속하는 방식으로 진행함 => crawling 두번 진행
 
-# 20230831에 대한 접속을 대한 코드 구성한후 8월 전체에 대해서 적용
+# 20230930에 대한 접속을 대한 코드 구성한후 9월 전체에 대해서 적용
 
 import requests
 from bs4 import BeautifulSoup
 import re # 정규표현식 사용
 
-response = requests.get("https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=001&date=20230831&page=1", headers={"User-agent": "Mozilla/5.0"})
+response = requests.get("https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=001&date=20230930&page=1", headers={"User-agent": "Mozilla/5.0"})
 soup = BeautifulSoup(response.text, "html.parser")
 # 현재 페이지 확인
 page_find = soup.select_one(".paging")
