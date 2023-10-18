@@ -17,7 +17,7 @@ for d in range(1, 32):
         date = str(d)
         if d < 10:
             date = "0" + str(d)
-        response = requests.get("https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=001&date=202308" + str(date) + "&page=" + str(p), headers={"User-agent": "Mozilla/5.0"})
+        response = requests.get("https://news.naver.com/main/list.naver?mode=LPOD&mid=sec&oid=001&date=202309" + str(date) + "&page=" + str(p), headers={"User-agent": "Mozilla/5.0"})
         soup = BeautifulSoup(response.text, "html.parser")
         # 현재 페이지 확인
         page_find = soup.select_one(".paging")
@@ -27,7 +27,7 @@ for d in range(1, 32):
         page_result = int(page_result)
         if p != page_result:
             break
-        print("기사날짜: 202308" + str(date))
+        print("기사날짜: 202309" + str(date))
         print("현재 페이지: ", page_result) # url상의 페이지가 현재 페이지와 다르면 while반복문 종료
         # 기사 크롤링
         title_find = soup.select("dl > dt > a")
